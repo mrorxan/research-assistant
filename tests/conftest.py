@@ -9,6 +9,7 @@ import pytest
 from ai.providers.base import LLMProvider
 from ai.schemas import Source
 from ai.sources import WebSearchProvider
+from researcher.config import Settings
 
 
 class FakeLLM(LLMProvider):
@@ -86,12 +87,6 @@ def sample_sources() -> list[Source]:
             origin="wikipedia",
         ),
     ]
-
-
-# SE-layer fixtures. Everything above this line belongs to the provided
-# smoke-test contract and keeps its names unchanged.
-
-from researcher.config import Settings
 
 
 @pytest.fixture
