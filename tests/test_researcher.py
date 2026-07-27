@@ -13,6 +13,7 @@ from researcher.core.researcher import (
     validate_question,
 )
 
+
 class FakeOrchestrator:
     def __init__(self, outcome):
         self._outcome = outcome

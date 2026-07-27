@@ -6,8 +6,7 @@ import re
 
 from ai.providers.base import LLMProvider
 from ai.providers.factory import get_llm
-from ai.schemas import Source, Citation, AnswerWithCitations
-
+from ai.schemas import AnswerWithCitations, Citation, Source
 
 _PROMPT_TEMPLATE = """You are a careful research assistant. Answer the user's
 question using ONLY the numbered sources below. Cite each claim with its

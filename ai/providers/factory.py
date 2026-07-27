@@ -15,10 +15,10 @@ from __future__ import annotations
 import os
 
 from ai.providers.base import (
-    VLMProvider,
-    LLMProvider,
     EmbeddingProvider,
+    LLMProvider,
     ProviderError,
+    VLMProvider,
 )
 
 

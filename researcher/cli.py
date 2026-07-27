@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-import sys
 import asyncio
 import logging
+import sys
 
 import click
 import httpx

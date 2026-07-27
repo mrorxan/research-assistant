@@ -8,6 +8,7 @@ from ai.providers.base import LLMProvider, ProviderError
 from researcher.config import Settings
 from researcher.services.failover import FailoverLLM, build_llm
 
+
 class HealthyLLM(LLMProvider):
     def __init__(self, reply: str) -> None:
         self.reply = reply

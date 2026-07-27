@@ -17,9 +17,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from ai.schemas import Source  # noqa: E402
-from researcher.concurrency.orchestrator import SourceOrchestrator  # noqa: E402
-from researcher.services.cache import FetchResult  # noqa: E402
+from ai.schemas import Source
+from researcher.concurrency.orchestrator import SourceOrchestrator
+from researcher.services.cache import FetchResult
 
 SLEEP_PER_SOURCE_S = 0.5
 
