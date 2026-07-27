@@ -7,8 +7,8 @@ from typing import Any
 import pytest
 
 from ai.providers.base import LLMProvider
-from ai.sources import WebSearchProvider
 from ai.schemas import Source
+from ai.sources import WebSearchProvider
 
 
 class FakeLLM(LLMProvider):
@@ -86,3 +86,68 @@ def sample_sources() -> list[Source]:
             origin="wikipedia",
         ),
     ]
+
+
+# SE-layer fixtures. Everything above this line belongs to the provided
+# smoke-test contract and keeps its names unchanged.
+
+from researcher.config import Settings  # noqa: E402
+
+
+@pytest.fixture
+def tmp_cache_dir(tmp_path):
+    directory = tmp_path / "cache"
+    directory.mkdir()
+    return directory
+
+
+@pytest.fixture
+def fast_settings(tmp_cache_dir, tmp_path) -> Settings:
+    """Settings tuned for fast tests: tiny backoff, short timeouts, tmp cache."""
+    return Settings(
+        LLM_PROVIDER="gemini",
+        LLM_MODEL="gemini-2.5-flash-lite",
+        WEB_SEARCH_PROVIDER="tavily",
+        LOG_LEVEL="WARNING",
+        CACHE_DIR=tmp_cache_dir,
+        CACHE_TTL_SECONDS=60,
+        COST_LOG_PATH=tmp_path / "costs.jsonl",
+        PER_SOURCE_TIMEOUT_SECONDS=0.5,
+        SYNTHESIZE_TIMEOUT_SECONDS=1.0,
+        MAX_SOURCES_PER_QUERY=2,
+        MAX_PARALLEL=3,
+        MAX_QUESTION_LENGTH=120,
+        RETRY_MAX_ATTEMPTS=2,
+        RETRY_BACKOFF_MIN=0.01,
+        RETRY_BACKOFF_MAX=0.02,
+    )
+
+
+@pytest.fixture
+def wikipedia_source() -> Source:
+    return Source(
+        title="Test Wiki Article",
+        url="https://en.wikipedia.org/wiki/Test",
+        snippet="Wikipedia summary text.",
+        origin="wikipedia",
+    )
+
+
+@pytest.fixture
+def arxiv_source() -> Source:
+    return Source(
+        title="Test arXiv Paper",
+        url="https://arxiv.org/abs/0001.0001",
+        snippet="arXiv abstract text.",
+        origin="arxiv",
+    )
+
+
+@pytest.fixture
+def web_source() -> Source:
+    return Source(
+        title="Test Web Result",
+        url="https://example.com/article",
+        snippet="Web search result snippet.",
+        origin="web",
+    )
