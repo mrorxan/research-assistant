@@ -1,0 +1,211 @@
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\newcommand{\teamname}{Binary}
+\newcommand{\topicchoice}{Topic 4 -- Async Research Assistant}
+\newcommand{\memberone}{Orkhan Aliyev}
+\newcommand{\membertwo}{Habil Huseynov}
+\newcommand{\repolink}{github.com/mrorxan/research-assistant}
+
+\newcommand{\coursecode}{AI-ENG-110}
+\newcommand{\coursename}{Software Engineering}
+\newcommand{\institution}{AI Academy, National AI Center}
+\newcommand{\semester}{Spring 2026}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[scaled=0.94]{helvet}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,backgrounds}
+
+\usetheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+\definecolor{accent}{HTML}{0B3D91}
+\definecolor{soft}{HTML}{F2F4F8}
+\definecolor{ok}{HTML}{166534}
+\definecolor{barmuted}{HTML}{9AA5B1}
+
+\setbeamercolor{title}{fg=accent}
+\setbeamercolor{frametitle}{fg=accent}
+\setbeamercolor{itemize item}{fg=accent}
+\setbeamercolor{itemize subitem}{fg=accent}
+\setbeamercolor{enumerate item}{fg=accent}
+\setbeamercolor{block title}{bg=accent,fg=white}
+\setbeamercolor{block body}{bg=soft,fg=black}
+
+\setbeamerfont{title}{size=\Large,series=\bfseries}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+
+\setbeamertemplate{footline}{%
+  \hfill{\scriptsize\color{black!60}\insertframenumber\,/\,\inserttotalframenumber}\hspace*{3ex}\vskip4pt%
+}
+
+\definecolor{codegreen}{rgb}{0,0.55,0}
+\definecolor{codepurple}{rgb}{0.55,0,0.78}
+\lstdefinestyle{python}{
+  language=Python,
+  backgroundcolor=\color{soft},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{accent},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+}
+
+\begin{document}
+
+% Slide 1: title. Speaker: Orkhan.
+\begin{frame}
+  \begin{center}
+    \vspace{0.4cm}
+    {\small \textsc{\institution}}\\[0.2em]
+    {\small \textsc{\coursecode{} -- \coursename{} -- \semester{}}}\\[1.1em]
+    \rule{0.7\textwidth}{0.6pt}\\[0.4em]
+    {\Huge\bfseries\color{accent} \topicchoice}\\[0.4em]
+    \rule{0.7\textwidth}{0.6pt}\\[1.1em]
+    {\large Team \teamname}\\[0.5em]
+    {\normalsize \memberone\quad\textbullet\quad\membertwo}\\[0.9cm]
+    {\footnotesize\itshape Final Project Defense -- July 2026}\\[0.3em]
+    {\footnotesize\texttt{\repolink}}
+  \end{center}
+\end{frame}
+
+% Slide 2: the problem. Speaker: Orkhan.
+\begin{frame}{The problem in one sentence}
+  \begin{block}{What the system does}
+    Ask a research question; we fetch Wikipedia, arXiv, and a web search
+    \textbf{in parallel}, then an LLM writes a short answer where
+    \textbf{every claim carries a [N] citation} back to a real source.
+  \end{block}
+
+  \vspace{0.6em}
+  \begin{columns}[T,onlytextwidth]
+  \column{0.31\textwidth}
+  \textbf{In}
+  \begin{itemize}
+    \item One question, $\le$ 500 chars
+    \item Optional \texttt{--sources wiki,arxiv}
+  \end{itemize}
+
+  \column{0.33\textwidth}
+  \textbf{Out}
+  \begin{itemize}
+    \item Cited answer + references
+    \item Timing, cache state, failures
+  \end{itemize}
+
+  \column{0.30\textwidth}
+  \textbf{Why}
+  \begin{itemize}
+    \item LLMs alone hallucinate
+    \item Grounding in sources = RAG
+  \end{itemize}
+  \end{columns}
+
+  \vspace{0.9em}
+  \centering
+  \texttt{python -m researcher ask "..."}\\[0.3em]
+  {\footnotesize Gemini 2.5 Flash Lite + Tavily, swappable by env var}
+\end{frame}
+
+% Slide 3: architecture. Speaker: Orkhan.
+\begin{frame}{Architecture: one job per layer}
+  \begin{columns}[T,onlytextwidth]
+  \column{0.63\textwidth}
+  \begin{center}
+  \begin{tikzpicture}[
+    node distance=2.4mm,
+    box/.style={draw,rounded corners=2pt,minimum width=5.2cm,minimum height=0.56cm,align=center,font=\footnotesize},
+    aibox/.style={box,fill=soft,draw=accent,thick},
+    sebox/.style={box,fill=accent!10,draw=accent},
+    entry/.style={box,fill=ok!15,draw=ok,thick},
+    side/.style={box,fill=accent!5,draw=accent,minimum width=2.2cm,font=\scriptsize},
+    arrow/.style={-Stealth,thick,shorten <=1pt,shorten >=1pt}
+  ]
+    \node[entry] (cli) {CLI};
+    \node[sebox,below=of cli] (core) {Researcher: validate, glue};
+    \node[sebox,below=of core] (orch) {Orchestrator: gather + timeouts};
+    \node[sebox,below=of orch] (cache) {Cache facade: hit or live};
+    \node[sebox,below=of cache] (svc) {AIService: retries, logs, cost};
+    \node[aibox,below=of svc] (ai) {\textbf{ai/ (provided, unchanged)}};
+    \node[side,right=0.35cm of cache] (store) {CacheStore\\JSON + TTL};
+    \draw[arrow] (cli) -- (core);
+    \draw[arrow] (core) -- (orch);
+    \draw[arrow] (orch) -- (cache);
+    \draw[arrow] (cache) -- (svc);
+    \draw[arrow] (svc) -- (ai);
+    \draw[arrow] (cache) -- (store);
+  \end{tikzpicture}
+  \end{center}
+
+  \column{0.34\textwidth}
+  \vspace{0.3em}
+  \textbf{Three hard boundaries}
+  \begin{itemize}\setlength\itemsep{0.45em}
+    \item Only \textbf{one module} imports \texttt{ai/}
+    \item Only the facade touches storage
+    \item Only the orchestrator spawns tasks
+  \end{itemize}
+
+  \vspace{0.7em}
+  \begin{block}{Consequence}
+    Swapping the LLM provider = one env var, zero code changes.
+  \end{block}
+  \end{columns}
+\end{frame}
+
+% Slide 4: design decisions. Speaker: Orkhan.
+\begin{frame}{Three design decisions we can defend}
+  \begin{enumerate}\setlength\itemsep{0.8em}
+    \item \textbf{asyncio, not threads.}\\
+      Three I/O-bound HTTP calls per question. One event loop, no GIL contention,
+      and the provided fetchers are already coroutines.
+    \item \textbf{A timeout per task, and one for the LLM too.}\\
+      Each source gets its own \texttt{asyncio.timeout}, so a slow Wikipedia cannot
+      cancel a fast arXiv. The synthesis call has its own 60\,s bound.
+    \item \textbf{Filesystem JSON cache, and never cache empty results.}\\
+      Entries are idempotent within their TTL, so no database needed. An empty
+      result means a bad moment; remembering it for 24\,h would serve nothing
+      after the source recovers.
+  \end{enumerate}
+\end{frame}
+
+% Slide 5: wrapping ai/. Speaker: Orkhan (end of first half).
+\begin{frame}{Wrapping the AI module: the service layer}
+  \centering
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Policy} & \textbf{Where it lives} \\
+    \midrule
+    Retries: 3 attempts, backoff 1--8\,s, only on \texttt{ProviderError} & AIService \\
+    Programmer errors (\texttt{ValueError}) are \textbf{not} retried & AIService \\
+    Cache by (source, canonicalised query), TTL 24\,h & Cache facade + store \\
+    Cost record per LLM call, \texttt{cost-report} command & CostMeter \\
+    Structured key=value logs, never a secret & everywhere \\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{1.0em}
+  \begin{block}{Learned the hard way, live}
+    Wikipedia returns \textbf{HTTP 403} unless the User-Agent identifies you with a
+    contact. One shared \texttt{httpx} client now carries a policy-compliant agent
+    for all three fetchers.
+  \end{block}
+
+  \vspace{0.4em}
+  {\footnotesize Handover point: this layer tested, the second half composes it into an app.}
+\end{frame}
+
+% HABIL-HISSESI: Slide 6-12 PR-12-de buraya elave olunacaq
+
+\end{document}
