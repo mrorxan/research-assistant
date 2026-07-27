@@ -31,3 +31,32 @@ omit = ["researcher/__main__.py"]
 [tool.coverage.report]
 show_missing = true
 skip_empty = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["ai", "tests/test_ai_smoke.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["researcher"]
+strict_optional = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = ["ai.*"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = ["dotenv"]
+ignore_missing_imports = true
