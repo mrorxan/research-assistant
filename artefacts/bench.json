@@ -1,0 +1,8 @@
+{
+  "n_iterations": 5,
+  "sleep_per_source_s": 0.5,
+  "max_parallel": 3,
+  "sequential_s": 7.589,
+  "concurrent_s": 2.535,
+  "speedup": 2.99
+}

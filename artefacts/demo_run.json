@@ -1,0 +1,383 @@
+[
+  {
+    "question_id": "q1",
+    "elapsed_ms": 4449,
+    "question": "What is photosynthesis and what are its main stages?",
+    "duration_ms": 4449,
+    "cache_hits": {
+      "wikipedia": false,
+      "arxiv": false,
+      "web": false
+    },
+    "failed_sources": [],
+    "started_at": "2026-07-20T09:15:06.108256+00:00",
+    "answer": {
+      "question": "What is photosynthesis and what are its main stages?",
+      "answer": "Photosynthesis is a system of biological processes used by autotrophic organisms, such as most plants, algae, and cyanobacteria, to convert light energy into chemical energy [4]. This chemical energy fuels their metabolism [4]. Specifically, plants use sunlight, water, and carbon dioxide to create oxygen and energy in the form of sugar [5]. During this process, water is transformed into oxygen, and carbon dioxide is transformed into glucose [5]. The oxygen is then released back into the air [5]. Photosynthesis consists of two main stages: the light-dependent stage and the light-independent stage [6].",
+      "citations": [
+        {
+          "index": 4,
+          "title": "Photosynthesis",
+          "url": "https://en.wikipedia.org/wiki/Photosynthesis",
+          "origin": "web"
+        },
+        {
+          "index": 5,
+          "title": "Photosynthesis",
+          "url": "https://education.nationalgeographic.org/resource/photosynthesis",
+          "origin": "web"
+        },
+        {
+          "index": 6,
+          "title": "The process of photosynthesis - Student Academic Success",
+          "url": "https://www.monash.edu/student-academic-success/biology/photosynthesis/the-process-of-photosynthesis",
+          "origin": "web"
+        }
+      ]
+    },
+    "sources_used": [
+      {
+        "title": "What is \"fundamental\"?",
+        "url": "http://arxiv.org/abs/1805.06617v1",
+        "snippet": "Our collective views regarding the question \"what is fundamental?\" are continually evolving. These ontological shifts in what we regard as fundamental are largely driven by theoretical advances (\"what can we calculate?\"), and experimental advances (\"what can we measure?\"). Rarely (in my view) is epistemology the fundamental driver; more commonly epistemology reacts (after a few decades) to what is going on in the theoretical and experimental zeitgeist.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Proceedings to the 27th Workshop \"What Comes Beyond the Standard Models\" Bled, July 8-17, 2024",
+        "url": "http://arxiv.org/abs/2504.17803v1",
+        "snippet": "The series of meetings ``What comes beyond the Standard Models'' started in 1998 with the idea of organizing a workshop where participants would spend most of the time in discussions, confronting different approaches and ideas. The idea was successful and has developed into an annual workshop, which is taking place every year since 1998. Very open-minded and fruitful discussions have become the trademark of our workshops, producing several published works. We discussed a lot of concepts which could help to understand our universe from the level of the second quantized elementary fermion and boson fields up to the level of the born of our universe.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "PRAXA: A Grammar for What-If Analysis",
+        "url": "http://arxiv.org/abs/2510.09791v3",
+        "snippet": "What-if analysis is widely used to explore hypothetical scenarios and evaluate alternative pathways to desired results. However, current approaches are fragmented: systems implement what-if capabilities under diverse terminologies with different analytic techniques. Such fragmentation limits expressiveness, impedes flexible composition and reuse of workflows, and hinders tighter integration with AI. We present PRAXA, a compositional grammar of what-if analysis derived from recurring patterns across 141 publications in visual analytics and HCI venues. PRAXA formulates three primitives: (1) data, defining variables under analysis, (2) model, specifying predictive mechanisms, and (3) interaction operations-pairs of user actions and system responses that execute analyses. We encode PRAXA into a declarative specification language, PSL. To evaluate PRAXA, we first show expressiveness by reconstructing representative workflows from prior work as structured compositions, exposing the predominant focus on single-step rather than multi-step reasoning. Second, we demonstrate composability by revealing that capabilities described under distinct terminologies share the same grammatical structure with different parameterizations, and that new multi-step workflows emerge through composition. Third, we illustrate PSL as an intermediate representation for translating natural-language what-if queries into executable interactive interfaces, enabling inspection, validation, and more transparent AI integration. By unifying diverse what-if approaches as a grammar, PRAXA provides a foundation for analyzing, composing, and supporting workflows in next-generation what-if systems.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Photosynthesis",
+        "url": "https://en.wikipedia.org/wiki/Photosynthesis",
+        "snippet": "# Photosynthesis. The carbohydrates produced are stored in or used by the plant. **Photosynthesis** is a system of biological processes by which photopigment-bearing autotrophic organisms, such as most plants, algae and cyanobacteria, convert light energy — typically from sunlight — into the chemical energy necessary to fuel their metabolism. The term *photosynthesis* usually refers to **oxygenic photosynthesis**, a process that releases oxygen as a byproduct of water splitting. Photosynthesis plays a critical role in producing and maintaining the oxygen content of the Earth's atmosphere, and it supplies most of the biological energy necessary for complex life on Earth. Archaea such as *Halobacterium* also perform a type of non-carbon-fixing anoxygenic photosynthesis, where the simpler photopigment retinal and its microbial rhodopsin derivatives \"Derivative (chemistry)\") are used to absorb green light and produce a proton (hydron) gradient across the cell membrane, and the subsequent ion movement powers transmembrane proton pumps to directly synthesize adenosine triphosphate (ATP), the \"energy currency\" of cells.",
+        "origin": "web"
+      },
+      {
+        "title": "Photosynthesis",
+        "url": "https://education.nationalgeographic.org/resource/photosynthesis",
+        "snippet": "Photosynthesis is the process by which plants use sunlight, water, and carbon dioxide to create oxygen and energy in the form of sugar. Most life on Earth depends on photosynthesis.The process is carried out by plants, algae, and some types of bacteria, which capture energy from sunlight to produce oxygen (O2) and chemical energy stored in glucose (a sugar). During photosynthesis, plants take in carbon dioxide (CO2) and water (H2O) from the air and soil. This transforms the water into oxygen and the carbon dioxide into glucose. The plant then releases the oxygen back into the air, and stores energy within the glucose molecules. Within the thylakoid membranes of the chloroplast is a light-absorbing pigment called chlorophyll, which is responsible for giving the plant its green color. The chlorophyll absorbs energy from the light waves, which is converted into chemical energy in the form of the molecules ATP and NADPH.",
+        "origin": "web"
+      },
+      {
+        "title": "The process of photosynthesis - Student Academic Success",
+        "url": "https://www.monash.edu/student-academic-success/biology/photosynthesis/the-process-of-photosynthesis",
+        "snippet": "*   Set up for Academic Success workshops Set up for Academic Success workshops. *   Set up for Academic Success workshops. # The process of photosynthesis. The light dependent stage and light independent stage of photosynthesisThe process by which plants use sunlight to convert carbon dioxide and water into carbohydrates and oxygen. Image 3: An image demonstrating the process of photosynthesis where carbon dioxide, combined with water, is transformed by sunlight to produce glucose and oxygen. The chloroplast is the key organelle responsible for photosynthesisThe process by which plants use sunlight to convert carbon dioxide and water into carbohydrates and oxygen.. The first stage of photosynthesisThe process by which plants use sunlight to convert carbon dioxide and water into carbohydrates and oxygen. PhotosynthesisThe process by which plants use sunlight to convert carbon dioxide and water into carbohydrates and oxygen. The second stage of photosynthesisThe process by which plants use sunlight to convert carbon dioxide and water into carbohydrates and oxygen.",
+        "origin": "web"
+      }
+    ]
+  },
+  {
+    "question_id": "q2",
+    "elapsed_ms": 3584,
+    "question": "How do transformer-based language models handle long context windows?",
+    "duration_ms": 3584,
+    "cache_hits": {
+      "wikipedia": false,
+      "arxiv": false,
+      "web": false
+    },
+    "failed_sources": [],
+    "started_at": "2026-07-20T09:15:09.691790+00:00",
+    "answer": {
+      "question": "How do transformer-based language models handle long context windows?",
+      "answer": "Transformer-based large language models (LLMs) have a finite context window, which can cause them to \"forget\" information from the beginning of the input if it exceeds this limit [4, 5]. The context length of LLMs has recently been extended to millions of tokens [2]. To handle longer contexts, approaches include semantic compression to fit long documents within a standard LLM window without architectural changes [4]. Another method is to maintain coherence in extended conversations by retrieving only the most relevant information [4]. Progress in advancing Transformer architectures aims to enhance long-context capabilities throughout the entire model lifecycle, from pre-training to inference [6].",
+      "citations": [
+        {
+          "index": 2,
+          "title": "Thus Spake Long-Context Large Language Model",
+          "url": "http://arxiv.org/abs/2502.17129v2",
+          "origin": "arxiv"
+        },
+        {
+          "index": 4,
+          "title": "2 Ways to Extend LLM Context Windows — Supermemory",
+          "url": "https://supermemory.ai/blog/extending-context-windows-in-llms",
+          "origin": "web"
+        },
+        {
+          "index": 5,
+          "title": "Why large language models struggle with long contexts",
+          "url": "https://www.understandingai.org/p/why-large-language-models-struggle",
+          "origin": "web"
+        },
+        {
+          "index": 6,
+          "title": "Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey",
+          "url": "https://arxiv.org/html/2311.12351v2",
+          "origin": "web"
+        }
+      ]
+    },
+    "sources_used": [
+      {
+        "title": "Beyond In-Context Learning: Aligning Long-form Generation of Large Language Models via Task-Inherent Attribute Guidelines",
+        "url": "http://arxiv.org/abs/2506.01265v1",
+        "snippet": "In-context learning (ICL) is an important yet not fully understood ability of pre-trained large language models (LLMs). It can greatly enhance task performance using a few examples, termed demonstrations, without fine-tuning. Although effective in question answering, ICL often underperforms in long-form generation tasks such as summarization. Under appropriately realistic assumptions, we empirically and theoretically show that ICL demonstrations alone are insufficient to teach LLMs the task language and format distributions for generation. We argue for explicit exposure to the task distributions and hypothesize that defining them by prompting enhances model performance. To this end, we present LongGuide, which efficiently generates two parallel streams of guidelines capturing task language and format properties: (i) Metric Guidelines (MGs) that instruct models to optimize self-evaluated metrics; and (ii) Output Constraint Guidelines (OCGs) that constrain generation at both token and sentence levels. LongGuide automatically selects the best combination of guidelines, improving both strong open- and closed-source LLMs by over 5% in both zero- and few-shot settings. We show that LongGuide is generalizable, learnable by weak models to enhance strong ones, and integrates synergistically with automatic prompt optimizers.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Thus Spake Long-Context Large Language Model",
+        "url": "http://arxiv.org/abs/2502.17129v2",
+        "snippet": "Long context is an important topic in Natural Language Processing (NLP), running through the development of NLP architectures, and offers immense opportunities for Large Language Models (LLMs), giving LLMs the lifelong learning potential akin to humans. Unfortunately, the pursuit of a long context is accompanied by numerous obstacles. Nevertheless, long context remains a core competitive advantage for LLMs. In the past two years, the context length of LLMs has achieved a breakthrough extension to millions of tokens. Moreover, research on long-context LLMs has expanded beyond length extrapolation to a comprehensive focus on architecture, infrastructure, training, and evaluation technologies. Inspired by the symphonic poem, Thus Spake Zarathustra, we draw an analogy between the journey of extending the context of LLM and the attempts of humans to transcend their mortality. In this survey, we will illustrate how LLM struggles between the tremendous need for a longer context and its equal need to accept the fact that it is ultimately finite. To achieve this, we give a global picture of the lifecycle of long-context LLMs from four perspectives: architecture, infrastructure, training, and evaluation, showcasing the full spectrum of long-context technologies. At the end of this survey, we will present 10 unanswered questions currently faced by long-context LLMs. We hope this survey can serve as a systematic introduction to research on long-context LLMs. Video: https://www.bilibili.com/video/BV11h9AYoEYj. Github: https://github.com/OpenMOSS/Thus-Spake-Long-Context-LLM.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "A$^2$RD: Agentic Autoregressive Diffusion for Long Video Consistency",
+        "url": "http://arxiv.org/abs/2605.06924v1",
+        "snippet": "Synthesizing consistent and coherent long video remains a fundamental challenge. Existing methods suffer from semantic drift and narrative collapse over long horizons. We present A$^2$RD, an Agentic Auto-Regressive Diffusion architecture that decouples creative synthesis from consistency enforcement. A$^2$RD formulates long video synthesis as a closed-loop process that synthesizes and self-improves video segment-by-segment through a Retrieve--Synthesize--Refine--Update cycle. It comprises three core components: (i) Multimodal Video Memory that tracks video progression across modalities; (ii) Adaptive Segment Generation that switches among generation modes for natural progression and visual consistency; and (iii) Hierarchical Test-Time Self-Improvement that self-improves each segment at frame and video levels to prevent error propagation. We further introduce LVBench-C, a challenging benchmark with non-linear entity and environment transitions to stress-test long-horizon consistency. Across public and LVBench-C benchmarks spanning one- to ten-minute videos, A$^2$RD outperforms state-of-the-art baselines by up to 30% in consistency and 20% in narrative coherence. Human evaluations corroborate these gains while also highlighting notable improvements in motion and transition smoothness.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "2 Ways to Extend LLM Context Windows — Supermemory",
+        "url": "https://supermemory.ai/blog/extending-context-windows-in-llms",
+        "snippet": "# 2 Approaches For Extending Context Windows in LLMs. Transformer-based large language models have become the poster boys of modern AI, yet they still share one stark limitation: a finite context window. Transformer-based large language models have become the poster boys of modern AI, yet they still share one stark limitation: a finite context window. * **Semantic Compression:** Shrink a single, extremely long document so it slips inside an ordinary LLM window without architectural changes. * **Infinite Chat with Supermemory:** Keep multi-hour conversations coherent by retrieving only the most relevant history at every turn. Along the way, you’ll set up Python environments, run clustering and summarization pipelines, and slot a transparent proxy into any OpenAI-compatible SDK to help your team ship better products faster. Even with a rolling summarizer, you're sending a huge amount of tokens back and forth to maintain a mere outline of your historical context. In this guide, we'll look at a couple of different approaches to this, the first of which is called \"Semantic Compression.\".",
+        "origin": "web"
+      },
+      {
+        "title": "Why large language models struggle with long contexts",
+        "url": "https://www.understandingai.org/p/why-large-language-models-struggle",
+        "snippet": "### Transformer-based LLMs get less efficient as context windows grow. *It’s Future of Transformers Week at Understanding AI! All week I’ll be examining the limitations of today’s LLMs and discussing possible solutions.*. When OpenAI released ChatGPT two years ago, it had a context window of just 8,192 tokens.1 This meant that if you fed it more than about 15 pages of text, it would “forget” information from the beginning of its context. Google’s Gemini 1.5 Pro allows 2 million tokens of context. Still, it’s going to take a lot more progress if we want AI systems with human-level cognitive abilities. Yet many human workers read and hear hundreds of millions of words during our working years—and we absorb even more information from sights, sounds, and smells in the world around us. These systems try to find documents relevant to a user’s query and then insert the most relevant documents into an LLM’s context window. So we’re going to want AI models to read and remember far more than 2 million tokens at inference time.",
+        "origin": "web"
+      },
+      {
+        "title": "Advancing Transformer Architecture in Long-Context Large Language Models: A Comprehensive Survey",
+        "url": "https://arxiv.org/html/2311.12351v2",
+        "snippet": "This article offers a comprehensive survey of the recent advancement in Transformer-based LLM architectures aimed at enhancing the long-context capabilities of LLMs throughout the entire model lifecycle, from pre-training through to inference. GPT (Radford et al., 2018, 2019; Brown et al., 2020) and their variants (Raffel et al., 2020; Touvron et al., 2023b; Jiang et al., 2023a), Natural Language Processing (NLP) has seen significantly advancement in human language understanding and generation (Therasa and Mathivanan, 2022; Li et al., 2022), revolutionizing numerous tasks in Natural Language Understanding (NLU) such as sentiment analysis (Zhang et al., 2018), Natural Language Generation (NLG) such as document summarization (El-Kassas et al., 2021), as well as other domains such as computer vision (Khan et al., 2022) and autonomous driving (Hu et al., 2023).",
+        "origin": "web"
+      }
+    ]
+  },
+  {
+    "question_id": "q3",
+    "elapsed_ms": 4192,
+    "question": "What were the main causes of the 2008 financial crisis?",
+    "duration_ms": 4192,
+    "cache_hits": {
+      "wikipedia": false,
+      "arxiv": false,
+      "web": false
+    },
+    "failed_sources": [],
+    "started_at": "2026-07-20T09:15:13.886091+00:00",
+    "answer": {
+      "question": "What were the main causes of the 2008 financial crisis?",
+      "answer": "The 2008 financial crisis was triggered by a series of interconnected factors [4]. The main causes included the housing market bubble and subprime mortgages [4]. It started with an epicenter focused on mortgage-backed securities (MBS) [3]. The global financial crisis of 2008 was caused by a combination of factors [5].",
+      "citations": [
+        {
+          "index": 3,
+          "title": "Financial Bubbles, Real Estate bubbles, Derivative Bubbles, and the Financial and Economic Crisis",
+          "url": "http://arxiv.org/abs/0905.0220v1",
+          "origin": "arxiv"
+        },
+        {
+          "index": 4,
+          "title": "(PDF) 2008 Financial Crisis: Causes and Costs",
+          "url": "https://www.researchgate.net/publication/369401291_2008_Financial_Crisis_Causes_and_Costs",
+          "origin": "web"
+        },
+        {
+          "index": 5,
+          "title": "Causes of the Global Financial Crisis (Financial Economics)",
+          "url": "https://www.tutor2u.net/economics/reference/financial-economics-causes-of-the-global-financial-crisis",
+          "origin": "web"
+        }
+      ]
+    },
+    "sources_used": [
+      {
+        "title": "Multi-messenger Observations of a Binary Neutron Star Merger",
+        "url": "http://arxiv.org/abs/1710.05833v2",
+        "snippet": "On 2017 August 17 a binary neutron star coalescence candidate (later designated GW170817) with merger time 12:41:04 UTC was observed through gravitational waves by the Advanced LIGO and Advanced Virgo detectors. The Fermi Gamma-ray Burst Monitor independently detected a gamma-ray burst (GRB 170817A) with a time delay of $\\sim$1.7 s with respect to the merger time. From the gravitational-wave signal, the source was initially localized to a sky region of 31 deg$^2$ at a luminosity distance of $40^{+8}_{-8}$ Mpc and with component masses consistent with neutron stars. The component masses were later measured to be in the range 0.86 to 2.26 Msun. An extensive observing campaign was launched across the electromagnetic spectrum leading to the discovery of a bright optical transient (SSS17a, now with the IAU identification of AT 2017gfo) in NGC 4993 (at $\\sim$40 Mpc) less than 11 hours after the merger by the One-Meter, Two Hemisphere (1M2H) team using the 1 m Swope Telescope. The optical transient was independently detected by multiple teams within an hour. Subsequent observations targeted the object and its environment. Early ultraviolet observations revealed a blue transient that faded within 48 hours. Optical and infrared observations showed a redward evolution over $\\sim$10 days. Following early non-detections, X-ray and radio emission were discovered at the transient's position $\\sim$9 and $\\sim$16 days, respectively, after the merger. Both the X-ray and radio emission likely arise from a physical process that is distinct from the one that generates the UV/optical/near-infrared emission. No ultra-high-energy gamma-rays and no neutrino candidates consistent with the source were found in follow-up searches. (Abridged)",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Risk-dependent centrality in economic and financial networks",
+        "url": "http://arxiv.org/abs/1907.07908v4",
+        "snippet": "Node centrality is one of the most important and widely used concepts in the study of complex networks. Here, we extend the paradigm of node centrality in financial and economic networks to consider the changes of node \"importance\" produced not only by the variation of the topology of the system but also as a consequence of the external levels of risk to which the network as a whole is submitted. Starting from the \"Susceptible-Infected\" (SI) model of epidemics and its relation to the communicability functions of networks we develop a series of risk-dependent centralities for nodes in (financial and economic) networks. We analyze here some of the most important mathematical properties of these risk-dependent centrality measures. In particular, we study the newly observed phenomenon of ranking interlacement, by means of which two entities may interlace their ranking positions in terms of risk in the network as a consequence of the change in the external conditions only, i.e., without any change in the topology. We test the risk-dependent centralities by studying two real-world systems: the network generated by collecting assets of the S\\&P 100 and the corporate board network of the US top companies, according to Forbes in 1999. We found that a high position in the ranking of the analyzed financial companies according to their risk-dependent centrality corresponds to companies more sensitive to the external market variations during the periods of crisis.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Financial Bubbles, Real Estate bubbles, Derivative Bubbles, and the Financial and Economic Crisis",
+        "url": "http://arxiv.org/abs/0905.0220v1",
+        "snippet": "The financial crisis of 2008, which started with an initially well-defined epicenter focused on mortgage backed securities (MBS), has been cascading into a global economic recession, whose increasing severity and uncertain duration has led and is continuing to lead to massive losses and damage for billions of people. Heavy central bank interventions and government spending programs have been launched worldwide and especially in the USA and Europe, with the hope to unfreeze credit and boltster consumption. Here, we present evidence and articulate a general framework that allows one to diagnose the fundamental cause of the unfolding financial and economic crisis: the accumulation of several bubbles and their interplay and mutual reinforcement has led to an illusion of a \"perpetual money machine\" allowing financial institutions to extract wealth from an unsustainable artificial process. Taking stock of this diagnostic, we conclude that many of the interventions to address the so-called liquidity crisis and to encourage more consumption are ill-advised and even dangerous, given that precautionary reserves were not accumulated in the \"good times\" but that huge liabilities were. The most \"interesting\" present times constitute unique opportunities but also great challenges, for which we offer a few recommendations.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "(PDF) 2008 Financial Crisis: Causes and Costs",
+        "url": "https://www.researchgate.net/publication/369401291_2008_Financial_Crisis_Causes_and_Costs",
+        "snippet": "Triggered by a series of interconnected factors, the main causes included the housing market bubble and subprime mortgages.",
+        "origin": "web"
+      },
+      {
+        "title": "Causes of the Global Financial Crisis (Financial Economics)",
+        "url": "https://www.tutor2u.net/economics/reference/financial-economics-causes-of-the-global-financial-crisis",
+        "snippet": "# Free Economics resources. # Causes of the Global Financial Crisis (Financial Economics). This study note looks at some of the root causes of the global financial crisis that exploded in 2007-08. **What were the main causes of the global financial crisis?**. The global financial crisis of 2008, also known as the Great Recession, was caused by a combination of factors. Some of the main causes of the crisis include:. ### Why are bail outs of failing banks a potential cause of moral hazard in financial markets? ### IB Economics - The Budget Outcome. ### Financial Economics - The Unwinding of the Yen Carry Trade: A Global Market Wake-Up Call. ### Financial Economics - Revolut finally secures a UK banking licence. ### IB Economics - Market Failure as a Failure to Allocate Resources Efficiently. Demand-Side Policies in the Great Depression and the Global Financial Crisis of 2008. ### In the News Teaching Activity – the UK economic trends 2010-24, success or failure?",
+        "origin": "web"
+      },
+      {
+        "title": "2008 financial crisis",
+        "url": "https://en.wikipedia.org/wiki/2008_financial_crisis",
+        "snippet": "# 2008 financial crisis. | Causes  * Causes of the European debt crisis * Causes of the 2000s United States housing bubble * Credit rating agencies and the subprime crisis * Government policies and the subprime mortgage crisis |. | Government response and policy proposals  * 2008 European Union stimulus plan * 2008–2009 Keynesian resurgence * American Recovery and Reinvestment Act of 2009 * Banking (Special Provisions) Act 2008_Act_2008 \"Banking (Special Provisions) Act 2008\") * Chinese economic stimulus program * Economic Stimulus Act of 2008 * Emergency Economic Stabilization Act of 2008 * Federal Reserve responses to the subprime crisis * Government intervention during the subprime mortgage crisis * Green New Deal * Housing and Economic Recovery Act of 2008 * National fiscal policy response to the Great Recession * Regulatory responses to the subprime crisis * Subprime mortgage crisis solutions debate * Term Asset-Backed Securities Loan Facility * Troubled Asset Relief Program |.",
+        "origin": "web"
+      }
+    ]
+  },
+  {
+    "question_id": "q4",
+    "elapsed_ms": 3826,
+    "question": "What is the current state of fusion energy research?",
+    "duration_ms": 3826,
+    "cache_hits": {
+      "wikipedia": false,
+      "arxiv": false,
+      "web": false
+    },
+    "failed_sources": [],
+    "started_at": "2026-07-20T09:15:17.713739+00:00",
+    "answer": {
+      "question": "What is the current state of fusion energy research?",
+      "answer": "Fusion energy research is progressing towards commercialization, with the industry actively engineering, testing, and piloting solutions for deployment within this decade [5]. Collaboration is increasing in scale and frequency globally, with initiatives like the U.S. Department of Energy's milestone-based fusion programs and siting support in Germany and the U.K. [5]. The fundamental challenge remains achieving a heat emission rate from a fusion plasma that exceeds the energy injected into it [6]. Tokamak reactors and stellarators, which magnetically confine a deuterium-tritium plasma, are central to this effort [6]. Programs like ARPA-E's ALPHA initiative have focused on advancing lower-cost pathways to economical fusion power by targeting pulsed, intermediate-density fusion approaches [1].",
+      "citations": [
+        {
+          "index": 1,
+          "title": "Retrospective of the ARPA-E ALPHA fusion program",
+          "url": "http://arxiv.org/abs/1907.09921v2",
+          "origin": "arxiv"
+        },
+        {
+          "index": 5,
+          "title": "The State of the Fusion Energy Industry in 2025",
+          "url": "https://www.peaknano.com/blog/the-state-of-the-fusion-energy-industry-in-2025",
+          "origin": "web"
+        },
+        {
+          "index": 6,
+          "title": "Nuclear Fusion Power - World Nuclear Association",
+          "url": "https://world-nuclear.org/information-library/current-and-future-generation/nuclear-fusion-power",
+          "origin": "web"
+        }
+      ]
+    },
+    "sources_used": [
+      {
+        "title": "Retrospective of the ARPA-E ALPHA fusion program",
+        "url": "http://arxiv.org/abs/1907.09921v2",
+        "snippet": "This paper provides a retrospective of the ALPHA (Accelerating Low-cost Plasma Heating and Assembly) fusion program of the Advanced Research Projects Agency-Energy (ARPA-E) of the U.S. Department of Energy. ALPHA's objective was to catalyze research and development efforts to enable substantially lower-cost pathways to economical fusion power. To do this in a targeted, focused program, ALPHA focused on advancing the science and technology of pulsed, intermediate-density fusion approaches, including magneto-inertial fusion and Z-pinch variants, that have the potential to scale to commercially viable fusion power plants. The paper includes a discussion of the origins and framing of the ALPHA program, a summary of project status and outcomes, a description of associated technology-transition activities, and thoughts on a potential follow-on ARPA-E fusion program.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "The Dark Energy Survey",
+        "url": "http://arxiv.org/abs/astro-ph/0510346v1",
+        "snippet": "We describe the Dark Energy Survey (DES), a proposed optical-near infrared survey of 5000 sq. deg of the South Galactic Cap to ~24th magnitude in SDSS griz, that would use a new 3 sq. deg CCD camera to be mounted on the Blanco 4-m telescope at Cerro Telolo Inter-American Observatory (CTIO). The survey data will allow us to measure the dark energy and dark matter densities and the dark energy equation of state through four independent methods: galaxy clusters, weak gravitational lensing tomography, galaxy angular clustering, and supernova distances. These methods are doubly complementary: they constrain different combinations of cosmological model parameters and are subject to different systematic errors. By deriving the four sets of measurements from the same data set with a common analysis framework, we will obtain important cross checks of the systematic errors and thereby make a substantial and robust advance in the precision of dark energy measurements.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Large Synoptic Survey Telescope: Dark Energy Science Collaboration",
+        "url": "http://arxiv.org/abs/1211.0310v1",
+        "snippet": "This white paper describes the LSST Dark Energy Science Collaboration (DESC), whose goal is the study of dark energy and related topics in fundamental physics with data from the Large Synoptic Survey Telescope (LSST). It provides an overview of dark energy science and describes the current and anticipated state of the field. It makes the case for the DESC by laying out a robust analytical framework for dark energy science that has been defined by its members and the comprehensive three-year work plan they have developed for implementing that framework. The analysis working groups cover five key probes of dark energy: weak lensing, large scale structure, galaxy clusters, Type Ia supernovae, and strong lensing. The computing working groups span cosmological simulations, galaxy catalogs, photon simulations and a systematic software and computational framework for LSST dark energy data analysis. The technical working groups make the connection between dark energy science and the LSST system. The working groups have close linkages, especially through the use of the photon simulations to study the impact of instrument design and survey strategy on analysis methodology and cosmological parameter estimation. The white paper describes several high priority tasks identified by each of the 16 working groups. Over the next three years these tasks will help prepare for LSST analysis, make synergistic connections with ongoing cosmological surveys and provide the dark energy community with state of the art analysis tools. Members of the community are invited to join the LSST DESC, according to the membership policies described in the white paper. Applications to sign up for associate membership may be made by submitting the Web form at http://www.slac.stanford.edu/exp/lsst/desc/signup.html with a short statement of the work they wish to pursue that is relevant to the LSST DESC.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "The Current State of Nuclear Fusion Research",
+        "url": "https://www.worldscholarsreview.org/article/the-current-state-of-nuclear-fusion-research-a-review-and-assessment-of-leading-technologies",
+        "snippet": "# The Current State of Nuclear Fusion Research: A Review and Assessment of Leading Technologies. Dr. Song is currently a post-doctoral researcher in the Department of Engineering Science at the University of Oxford with research specialization in Nuclear Physics.*. With the increasing costs of fuel extraction and growing energy demand of mankind, an alternative and high-density source of power is crucially needed. The variable nature of renewable energy sources like solar and wind energy require the supplementation of an alternate energy source that can provide continuous and dispatchable baseload power. Currently, there are two main methods of implementation: magnetic confinement fusion (MCF), including tokamaks and stellarators, and inertial confinement fusion (ICF). Stellarators are devices that are relatively new to the field of nuclear fusion research but hold great promise if actualized. Projects like ITER and NIF hold great promise for the commercial viability of nuclear reactors, but they are yet to achieve a net-positive energy output at a frequency to make power generation sustainable.",
+        "origin": "web"
+      },
+      {
+        "title": "The State of the Fusion Energy Industry in 2025",
+        "url": "https://www.peaknano.com/blog/the-state-of-the-fusion-energy-industry-in-2025",
+        "snippet": "### Peak Technology Center. ### Fusion Energy. # The State of the Fusion Energy Industry in 2025: A Global Transformation in Progress. According to the *2025 Global Fusion Industry Report* by the Fusion Industry Association (FIA), fusion no longer seems like a technology perpetually 20 years away—it is an energy solution actively being engineered, tested, and piloted for commercialization in this decade. From DOE’s milestone-based fusion programs in the U.S. to siting support in Germany and the U.K., collaboration is increasing in both scale and frequency. While electricity generation remains the primary mission of nearly every fusion company surveyed, the emergence of secondary applications, such as industrial heat, off-grid energy, space propulsion, and medical isotopes, is a testament to the diverse and exciting potential of fusion energy. ### The Fusion Energy Race: Why Global Leadership Matters Now. Fusion energy, often referred to as the “Holy Grail” of energy, holds the promise of being a... Subscribe to the Peak Nano newsletter for company news and updates on our innovation and impact.",
+        "origin": "web"
+      },
+      {
+        "title": "Nuclear Fusion Power - World Nuclear Association",
+        "url": "https://world-nuclear.org/information-library/current-and-future-generation/nuclear-fusion-power",
+        "snippet": "# Nuclear Fusion Power. * **The fundamental challenge is to achieve a** **rate of heat emitted by a fusion plasma that exceeds the rate of energy injected into the plasma.**. * **The main hope is centred on tokamak reactors and stellarators which confine a deuterium-tritium plasma magnetically.**. Today, many countries take part in fusion research to some extent, led by the European Union, the USA, Russia and Japan, with vigorous programmes also under way in China, Brazil, Canada, and Korea. In a fusion reactor, the concept is that neutrons generated from the D-T fusion reaction will be absorbed in a blanket containing lithium which surrounds the core. The difficulty has been to develop a device that can heat the D-T fuel to a high enough temperature and confine it long enough so that more energy is released through fusion reactions than is used to get the reaction going.",
+        "origin": "web"
+      }
+    ]
+  },
+  {
+    "question_id": "q5",
+    "elapsed_ms": 5104,
+    "question": "How does CRISPR-Cas9 gene editing work at a molecular level?",
+    "duration_ms": 5104,
+    "cache_hits": {
+      "wikipedia": false,
+      "arxiv": false,
+      "web": false
+    },
+    "failed_sources": [],
+    "started_at": "2026-07-20T09:15:22.819759+00:00",
+    "answer": {
+      "question": "How does CRISPR-Cas9 gene editing work at a molecular level?",
+      "answer": "CRISPR-Cas9 is a gene editing technology used to alter DNA [4]. It functions as molecular scissors that can cut a specific DNA sequence [6]. The system consists of two main components: a CRISPR-associated (Cas) nuclease, like Cas9, which binds and cuts DNA, and a guide RNA (gRNA) [6]. The Cas9 protein attaches to the DNA of a cell using a guide RNA that matches the target DNA sequence, and then separates the double helix [5]. The guide RNA directs the Cas nuclease to its intended target [6]. To ensure accuracy, the CRISPR sequence in a bacterium does not contain the PAM sequence recognized by the Cas9 enzyme, preventing it from cutting its own genome [4].",
+      "citations": [
+        {
+          "index": 4,
+          "title": "What is CRISPR-Cas9 and how does it work? | INTEGRA",
+          "url": "https://www.integra-biosciences.com/united-states/en/blog/article/what-crispr-cas9-and-how-does-it-work",
+          "origin": "web"
+        },
+        {
+          "index": 5,
+          "title": "What is CRISPR-Cas9? | How does CRISPR-Cas9 work?",
+          "url": "https://www.yourgenome.org/theme/what-is-crispr-cas9",
+          "origin": "web"
+        },
+        {
+          "index": 6,
+          "title": "What is CRISPR: Your Ultimate Guide | Synthego",
+          "url": "https://www.synthego.com/learn/crispr",
+          "origin": "web"
+        }
+      ]
+    },
+    "sources_used": [
+      {
+        "title": "Observation of the rare $B^0_s\\toμ^+μ^-$ decay from the combined analysis of CMS and LHCb data",
+        "url": "http://arxiv.org/abs/1411.4413v2",
+        "snippet": "A joint measurement is presented of the branching fractions $B^0_s\\toμ^+μ^-$ and $B^0\\toμ^+μ^-$ in proton-proton collisions at the LHC by the CMS and LHCb experiments. The data samples were collected in 2011 at a centre-of-mass energy of 7 TeV, and in 2012 at 8 TeV. The combined analysis produces the first observation of the $B^0_s\\toμ^+μ^-$ decay, with a statistical significance exceeding six standard deviations, and the best measurement of its branching fraction so far. Furthermore, evidence for the $B^0\\toμ^+μ^-$ decay is obtained with a statistical significance of three standard deviations. The branching fraction measurements are statistically compatible with SM predictions and impose stringent constraints on several theories beyond the SM.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Expected Performance of the ATLAS Experiment - Detector, Trigger and Physics",
+        "url": "http://arxiv.org/abs/0901.0512v4",
+        "snippet": "A detailed study is presented of the expected performance of the ATLAS detector. The reconstruction of tracks, leptons, photons, missing energy and jets is investigated, together with the performance of b-tagging and the trigger. The physics potential for a variety of interesting physics processes, within the Standard Model and beyond, is examined. The study comprises a series of notes based on simulations of the detector and physics processes, with particular emphasis given to the data expected from the first years of operation of the LHC at CERN.",
+        "origin": "arxiv"
+      },
+      {
+        "title": "Deep Search for Joint Sources of Gravitational Waves and High-Energy Neutrinos with IceCube During the Third Observing Run of LIGO and Virgo",
+        "url": "http://arxiv.org/abs/2601.07595v3",
+        "snippet": "The discovery of joint sources of high-energy neutrinos and gravitational waves has been a primary target for the LIGO, Virgo, KAGRA, and IceCube observatories. The joint detection of high-energy neutrinos and gravitational waves would provide insight into cosmic processes, from the dynamics of compact object mergers and stellar collapses to the mechanisms driving relativistic outflows. The joint detection of multiple cosmic messengers can also elevate the significance of the common observation even when some or all of the constituent messengers are sub-threshold, i.e. not significant enough to declare their detection individually. Using data from the LIGO, Virgo, and IceCube observatories, including sub-threshold events, we searched for common sources of gravitational waves and high-energy neutrinos during the third observing run of Advanced LIGO and Advanced Virgo detectors. Our search did not identify significant joint sources. We derive constraints on the rate densities of joint sources. Our results constrain the isotropic neutrino emission from gravitational-wave sources for very high values of the total energy emitted in neutrinos (> $10^{52} - 10^{54}$ erg).",
+        "origin": "arxiv"
+      },
+      {
+        "title": "What is CRISPR-Cas9 and how does it work? | INTEGRA",
+        "url": "https://www.integra-biosciences.com/united-states/en/blog/article/what-crispr-cas9-and-how-does-it-work",
+        "snippet": "Read on to learn more about other applications of CRISPR-Cas9, its mechanism of action, advantages over other genome editing methods, and the challenges that remain. ## What is CRISPR-Cas9? CRISPR-Cas9 is a genome editing technology used to change parts of the genome by removing, adding, or altering sections of DNA. To ensure that Cas9 only cuts the DNA of foreign invaders and not the CRISPR array that has integrated into the bacterial genome, the repeated CRISPR sequence of a bacterium never contains the PAM sequence that is recognized by the species-specific Cas9 enzyme. When an sgRNA sequence and a Cas9 enzyme are inserted into a cell, the two components automatically form a complex that starts scanning the cell's genome for PAM sequences and sections complementary to the sgRNA, before cleaving the DNA strands.2 The requirement for a PAM sequence is a limitation of CRISPR-Cas9 experiments, but it can often be solved as several Cas9 enzymes are able to recognize multiple PAM sequences.",
+        "origin": "web"
+      },
+      {
+        "title": "What is CRISPR-Cas9? | How does CRISPR-Cas9 work?",
+        "url": "https://www.yourgenome.org/theme/what-is-crispr-cas9",
+        "snippet": "# What is CRISPR-Cas9? 3d,Illustration,Of,The,Crispr-cas9,Genome,Editing,System. ### CRISPR-Cas9 is a genome editing tool that is creating a buzz in the science world. It is faster, cheaper and more accurate than previous techniques of editing DNA and has a wide range of potential applications. ## What are the applications and implications? ## What’s the future of CRISPR-Cas9? In order to edit a genetic sequence, a Cas9 protein (purple) attaches to the DNA of a cell using a guide RNA (orange) that matches a target DNA sequence, and separates the double helix. #### What is genome editing? Genome editing is a way of making specific changes to a cell or organism’s DNA – such as adding, removing or altering the DNA sequence. Genome editing is used to change the characteristics of a cell or organism, by making specific changes to its DNA. Jennifer Anne Doudna is a biochemist who won the Nobel Prize for her work in developing CRISPR-Cas9 genome editing technology.",
+        "origin": "web"
+      },
+      {
+        "title": "What is CRISPR: Your Ultimate Guide | Synthego",
+        "url": "https://www.synthego.com/learn/crispr",
+        "snippet": "# What Is CRISPR: The Ultimate Guide To CRISPR Mechanisms, Applications, Methods & More. It is a component of bacterial immune systems that can cut DNA, and has been repurposed as a gene editing tool. It acts as a precise pair of molecular scissors that can cut a target DNA sequence, directed by a customizable guide. The system is made up of two key parts: a **C**RISPR-**as**sociated (Cas) nuclease, which binds and cuts DNA, and a guide RNA sequence (gRNA), which directs the Cas nuclease to its target. Once the molecular mechanism for its DNA-cleaving ability was discovered, it was quickly developed as a tool for editing genomes. Today, CRISPR is well-known as a precise gene editing tool, but it took many years for scientists to figure out what it was and how to harness its potential. Their groundbreaking paper, revealing that the CRISPR-Cas9 bacterial immune system could be repurposed as a gene editing tool, was published in the journal Science in 2012.",
+        "origin": "web"
+      }
+    ]
+  }
+]
