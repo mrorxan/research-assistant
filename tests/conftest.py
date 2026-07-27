@@ -89,13 +89,10 @@ def sample_sources() -> list[Source]:
     ]
 
 
-<<<<<<< HEAD
 # SE-layer fixtures. Everything above this line belongs to the provided
 # smoke-test contract and keeps its names unchanged.
 
 
-=======
->>>>>>> e523a590d4bf134c0e2d6eeb6646e6af3d1917dd
 @pytest.fixture
 def tmp_cache_dir(tmp_path):
     directory = tmp_path / "cache"
