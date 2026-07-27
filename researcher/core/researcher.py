@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-import logging
 import time
+import logging
 from typing import Any
 
-from ai.providers.base import LLMProvider, ProviderError
-from researcher.concurrency.orchestrator import SourceOrchestrator
 from researcher.models import ResearchSession
 from researcher.services.ai_service import AIService
+from ai.providers.base import LLMProvider, ProviderError
+from researcher.concurrency.orchestrator import SourceOrchestrator
 
 logger = logging.getLogger(__name__)
 

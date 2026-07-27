@@ -58,7 +58,7 @@ class SourceOrchestrator:
             except TimeoutError:
                 logger.warning("source_timeout name=%s timeout_s=%.1f", name, self._timeout)
                 return SourceResult(name, [], "timeout", False)
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 # Intentional per-source isolation: log the failure and surface
                 # it as data so the remaining sources can still be used.
                 logger.warning("source_failed name=%s error=%s", name, exc)
