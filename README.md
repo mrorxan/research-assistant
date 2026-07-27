@@ -117,4 +117,77 @@ the reasoning behind each boundary are in [docs/architecture.md](docs/architectu
 +-- Dockerfile, requirements.txt, .env.example, pyproject.toml
 ```
 
-<!-- HABIL-HISSESI: Docker, Tests, Benchmark, Live demo, Notes, Tools bolmeleri PR-12-de buraya elave olunacaq -->
+## Run with Docker
+
+```bash
+docker build -t research-assistant .
+docker run --rm --env-file .env research-assistant
+docker run --rm --env-file .env research-assistant \
+    python -m researcher ask "How does CRISPR-Cas9 work?" --sources wiki,arxiv
+```
+
+The image is a multi-stage build on `python:3.12.7-slim`: the build stage compiles
+the dependency venv, the runtime stage ships only the venv and the source, and the
+container runs as a non-root user.
+
+## Tests
+
+```bash
+pytest                                          # full suite, all offline
+pytest tests/test_ai_smoke.py -v                # provided smoke tests (contract)
+pytest --cov=researcher --cov-report=term-missing
+```
+
+Current state, measured on Python 3.12.7:
+
+- 92 tests passing: 76 of ours plus the 16 provided smoke tests.
+- Coverage on `researcher/`: 96 percent.
+- Every test runs offline. The `ai.*` boundary is monkeypatched; the network is never touched.
+- `mypy` (strict-ish settings, 17 source files) and `ruff` both pass with zero findings.
+
+## Sequential vs concurrent benchmark
+
+```bash
+python scripts/bench.py --N 5 --max-parallel 3
+```
+
+The benchmark replaces the fetchers with stubs that sleep 0.5 s each, so the
+run is deterministic and measures the orchestrator itself rather than network
+variance.
+
+| Workload | N | Sequential | Concurrent (sem=3) | Speedup |
+|---|---|---|---|---|
+| 5 iterations x 3 sources, 0.5 s each | 5 | 7.589 s | 2.535 s | 2.99x |
+
+The theoretical maximum with three equally slow sources is 3x, so the measured
+2.99x shows the gather-based fan-out adds no meaningful overhead. In live runs
+the bottleneck is the slowest source plus the LLM call: the full demo over the
+five sample questions measured 3.6 to 5.1 s per question end to end
+(see `artefacts/demo_run.json`).
+
+## Live demo
+
+```bash
+python scripts/demo.py              # answers all 5 sample questions, saves artefacts/demo_run.json
+python scripts/demo.py --limit 2
+```
+
+## Notes and limitations
+
+- Wikipedia's search endpoint rejects clients without a descriptive User-Agent
+  (HTTP 403), and matches article titles rather than full questions, so long
+  questions can legitimately return zero Wikipedia sources. The pipeline
+  degrades gracefully and says so in the output.
+- Empty fetch results are not cached, so a source that had an outage is retried
+  on the next ask instead of serving nothing for a whole TTL.
+- The cache has no cross-process lock; two simultaneous asks for the same new
+  question would both fetch live and the last writer wins. Entries are
+  idempotent within their TTL, so this is harmless at CLI scale.
+- Cost figures are estimates: the provided ai/ interface returns plain text,
+  so token counts are approximated as characters divided by four.
+
+## Tools and acknowledgements
+
+The provided `ai/` package and the course LaTeX templates are the key external
+inputs. AI assistance used during development is disclosed in the report and
+the contribution statement.

@@ -230,7 +230,35 @@ Typed values cross every boundary: \texttt{Settings} (configuration), \texttt{So
 
 One deliberate detail: cache-hit information travels in return values rather than in shared mutable state on the service object, so two concurrent asks against the same service cannot interleave their bookkeeping.
 
-% HABIL-BLOK-A: Section 3 (Concurrency & Performance) PR-12-de buraya elave olunacaq
+\section{Concurrency \& Performance}\label{sec:concurrency}
+
+\subsection{Why this concurrency model}
+
+The workload is three I/O-bound HTTP calls per question, each dominated by network round-trips. \texttt{asyncio} with \texttt{asyncio.gather} runs them on one event loop with negligible overhead, and the provided fetchers are already coroutines, so the async model is native rather than bolted on. Threads would add context-switch cost for no parallel gain under the GIL; process pools are for CPU-bound work, which this is not. Parallelism is bounded by an \texttt{asyncio.Semaphore} configured through \texttt{MAX\_PARALLEL} (default 3, one slot per source). At 1 the system degenerates to sequential fetching; far above 3 the bound stops mattering for a single ask but protects politeness if a batch script funnels many questions through one orchestrator.
+
+\subsection{Sequential-vs-concurrent benchmark}
+
+The benchmark replaces the fetchers with stubs that sleep 0.5\,s each, so the measurement is deterministic and isolates the orchestrator's own overhead from network variance. Command and result (Windows 11 laptop, Python 3.12.7, dependencies from the pinned \texttt{requirements.txt}):
+
+\begin{lstlisting}[style=python,language=bash,numbers=none]
+python scripts/bench.py --N 5 --max-parallel 3
+\end{lstlisting}
+
+\begin{center}\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Workload} & $N$ & \textbf{Sequential (s)} & \textbf{Concurrent (s)} & \textbf{Speedup} \\
+\midrule
+5 iterations $\times$ 3 sources, 0.5\,s each & 5 & 7.589 & 2.535 & 2.99$\times$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three equally slow sources cap the theoretical speedup at 3$\times$; measuring 2.99$\times$ says the gather fan-out and semaphore add no observable overhead at this scale. The honest caveat is that live speedup is smaller because the sources are not equally slow and the LLM call is serial: in the live demo the end-to-end time per question was 3.6--5.1\,s, of which roughly half is synthesis. After parallelising the fetches, the bottleneck is $\max(t_{\text{wiki}}, t_{\text{arxiv}}, t_{\text{web}})$ plus the LLM; the next real win would be streaming the LLM output, not more fetch parallelism.
+
+\subsection{Rate limit \& politeness}
+
+Request-count concurrency is bounded by the semaphore; we did not add token-bucket limiting because the free tiers involved (Wikipedia, arXiv, Tavily, Gemini) are generous at our scale and the retry policy absorbs transient 429/503 responses. This is not hypothetical: Gemini's free tier returned real 503s during development, and the exponential backoff (1\,s, 2\,s, capped at 8\,s, three attempts) recovered every time. The highest burst our code produces is three concurrent fetches per ask. One politeness detail proved mandatory rather than optional: Wikipedia rejects API requests whose User-Agent does not identify the client and a contact, returning HTTP 403. We verified this empirically (the default client and a browser-imitating string are both rejected; a policy-compliant string is accepted) and set a compliant User-Agent on the single shared \texttt{httpx.AsyncClient} that all fetchers reuse.
 
 \section{Robustness \& Error Handling}\label{sec:robustness}
 
@@ -286,7 +314,120 @@ The live provider is the source of truth; the cache is a derived view invalidate
 
 We cache the per-source \texttt{list[Source]}, keyed by canonicalised query (lower-cased, trimmed, whitespace-collapsed), so \texttt{"What is X?"} and \texttt{"what  is x?"} share an entry. \texttt{--no-cache} bypasses both read and write. Two policy decisions matter. First, \emph{empty results are never cached}: an empty list usually means the source had a bad moment, or the question does not match a Wikipedia title, and remembering that for 24 hours would keep serving nothing after the source recovers. Second, the hit/miss state of every source is returned to the user on every ask (\texttt{cache: wikipedia=miss, arxiv=hit, ...}), which turned out to be the single most useful debugging signal in development. Measured behaviour on a repeated ask: arXiv and web hit; Wikipedia misses again exactly when its first response was empty, which is the no-negative-caching rule doing its job.
 
-% HABIL-BLOK-B: Section 6-9, Tools, References ve Appendix PR-12-de buraya elave olunacaq
+\section{Testing}\label{sec:testing}
+
+\subsection{Strategy \& coverage}
+
+The suite contains \textbf{92 tests}: 76 of ours plus the 16 provided smoke tests, running in about 6 seconds, entirely offline. We mock at the \texttt{ai.*} function boundary (monkeypatching \texttt{researcher.services.ai\_service.fetch\_wikipedia} and friends) rather than inside the provided package, so the smoke tests keep exercising the real \texttt{ai/} code. The provided smoke tests pass unmodified; the file is byte-identical to the distributed one and is excluded from our linter so no tool can silently rewrite it.
+
+\begin{center}\small
+\begin{tabular}{lc}
+\toprule
+\textbf{Check} & \textbf{Result} \\
+\midrule
+\texttt{pytest} (76 own + 16 provided smoke) & 92 passed \\
+Coverage on \texttt{researcher/} (\texttt{pytest --cov}) & 96\,\% \\
+\texttt{mypy} (17 source files, \texttt{disallow\_untyped\_defs}) & 0 issues \\
+\texttt{ruff} (lint + import order, rules E, F, W, I, UP, B) & 0 findings \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Per module, coverage is 100\,\% on the orchestrator, config, core flow, models, and cache facade; the uncovered 4\,\% sits in defensive branches (cache-file write errors, retry-loop fallthroughs) and the CLI's live wiring function, which is exercised by the real demo rather than by mocks.
+
+\subsection{Notable tests}
+
+\begin{itemize}[topsep=2pt,itemsep=1pt]
+  \item \textbf{Happy path, end to end.} \texttt{test\_full\_flow\_with\_mocked\_ai} patches all four \texttt{ai.*} functions, runs a real \texttt{Researcher} built by the CLI wiring, and asserts sources, answer, and empty failure list.
+  \item \textbf{Concurrency degradation.} \texttt{test\_one\_source\_exception\_does\_not\_kill\_others} makes the web fetcher raise; the other two sources still deliver and \texttt{failed == ["web"]}. A companion test asserts the three fetches actually overlap in time, not just complete.
+  \item \textbf{Error-path retry discrimination.} \texttt{test\_fetch\_wikipedia\_retries\_then\_succeeds} counts calls to prove exactly one retry happened; \texttt{test\_value\_error\_is\_not\_retried} proves programmer errors are not retried. Together they pin the retry predicate, which is where a wrong exception class would silently destroy the policy.
+  \item \textbf{Negative-caching rule.} \texttt{test\_empty\_results\_are\_not\_cached} feeds an empty result, then a non-empty one, and asserts the second call went live.
+  \item \textbf{Failover chaos test.} \texttt{test\_fallback\_used\_when\_primary\_call\_fails} kills the primary provider and asserts the answer comes from the secondary; a lazy-construction test asserts the fallback SDK is never touched while the primary is healthy.
+\end{itemize}
+
+What we did not test: live provider behaviour inside the suite, deliberately, per the rubric. The live path is exercised by \texttt{scripts/demo.py}, whose committed output is the evidence.
+
+\section{Deployment \& Reproducibility}\label{sec:deploy}
+
+\subsection{Docker image}
+
+Multi-stage build on \texttt{python:3.12.7-slim}: the build stage installs the pinned requirements into \texttt{/opt/venv} and strips pip; the runtime stage copies only that venv plus the source, and runs as a non-root user.
+
+\begin{lstlisting}[style=python,language=bash,numbers=none]
+docker build -t research-assistant .
+docker run --rm --env-file .env research-assistant
+docker run --rm research-assistant python -m pytest -q   # 92 passed in-container
+\end{lstlisting}
+
+We verified all three commands on the submission machine: the default command runs a full live ask (fetch, synthesis, citations) inside the container, and the entire test suite passes in-container. Compressed image content is 86\,MB; the unpacked dependency venv is 153\,MB, dominated by numpy (70\,MB), which the provided \texttt{ai/} package imports and we therefore cannot drop. Python inside the image (3.12.7) matches the development venv exactly, which closes the class of works-on-my-machine bugs where code is written on one interpreter and shipped on another.
+
+\subsection{Configuration}
+
+All configuration is environment-driven and documented in \texttt{.env.example} and the README table: provider selection (\texttt{LLM\_PROVIDER}, \texttt{LLM\_MODEL}, keys), optional failover (\texttt{LLM\_FALLBACK\_PROVIDER}, \texttt{LLM\_FALLBACK\_MODEL}), web search (\texttt{WEB\_SEARCH\_PROVIDER}, \texttt{TAVILY\_API\_KEY}), and the runtime knobs (log level, cache location and TTL, per-source and synthesis timeouts, source and parallelism limits, question length cap, retry policy). Invalid values fail at startup with the field name; missing API keys surface at the first provider call as a \texttt{ProviderError} with a clear message. \texttt{.env} is gitignored and was never committed; \texttt{.env.example} carries every variable with its default.
+
+\section{Bonus Features}\label{sec:bonus}
+
+\begin{itemize}[topsep=2pt,itemsep=2pt]
+  \item \textbf{Multi-provider failover.} \texttt{FailoverLLM} implements the provided \texttt{LLMProvider} ABC and is handed to \texttt{ai.synthesize(llm=...)} when \texttt{LLM\_FALLBACK\_PROVIDER} is set. Providers are constructed lazily; chaos tests kill the primary at call time and at construction time (missing API key) and assert the secondary answers. Disabled by default so the core path stays identical to a no-bonus project.
+  \item \textbf{Cost telemetry.} Every synthesis call appends provider, model, estimated prompt and completion tokens, and an estimated dollar cost to \texttt{costs.jsonl}; \texttt{python -m researcher cost-report --since N} summarises totals and a per-model breakdown. Because the provided interface returns plain text, tokens are estimated as characters divided by four, and the report says so. Over development we recorded 14 synthesis calls, roughly 14.8\,k prompt and 2.1\,k completion tokens, \$0.0023 in total, about \$0.00017 per question.
+  \item \textbf{GitHub Actions CI.} On every pull request and push to main: ruff, mypy, pytest with a 60\,\% coverage gate, the provided smoke tests as a separate step, and a Docker image build.
+  \item \textbf{Multi-stage Dockerfile.} Described in \S\ref{sec:deploy}; compressed content 86\,MB.
+\end{itemize}
+
+\section{Limitations \& Future Work}\label{sec:limits}
+
+\begin{itemize}[topsep=2pt,itemsep=1pt]
+  \item \textbf{Wikipedia recall on long questions.} The opensearch endpoint matches article titles, so a full natural-language question often returns zero Wikipedia sources; the pipeline degrades gracefully and says so, but a query-rewriting step (extracting key terms before the Wikipedia call) would raise recall.
+  \item \textbf{No streaming output.} The user waits several seconds in silence during synthesis. Gemini supports streaming; the CLI could print tokens as they arrive.
+  \item \textbf{Single-process cache.} Two simultaneous asks for the same new question both fetch live and the last writer wins. Entries are idempotent within their TTL so this is harmless at CLI scale, but a multi-process deployment would need file locking or a database.
+  \item \textbf{The deterministic benchmark is not a live benchmark.} It proves the orchestrator adds no overhead, by design; it does not predict production latency. The live numbers in \texttt{artefacts/demo\_run.json} partially fill that gap.
+  \item \textbf{Token counts are estimates.} Exact usage would require provider response metadata that the fixed \texttt{ai/} interface does not expose.
+\end{itemize}
+
+The worst failure mode on a busy day is Gemini free-tier saturation: with retries exhausted the ask fails with exit code 3. Configuring the failover chain to a second provider is the designed mitigation.
+
+\section{Tools \& Acknowledgements}\label{sec:tools}
+
+We used Claude (Anthropic) as an AI coding assistant throughout the project, in the way the course brief describes as collaborator rather than ghostwriter: it drafted substantial parts of the SE-layer modules, tests, and documentation against the architecture and policies we specified, and everything it produced was reviewed, run, and verified live by the team before being committed. All measured numbers in this report (benchmark, coverage, timings, costs, image size) come from runs we executed ourselves on the submission machine, and the committed artefacts reproduce them. The provided \texttt{ai/} package and the course LaTeX templates are the other key external inputs. Per-member ownership is listed in the contribution statement.
+
+\section*{References}
+\addcontentsline{toc}{section}{References}
+
+\begin{enumerate}[label={[\arabic*]},leftmargin=2.4em,itemsep=2pt]
+  \item Google, Gemini API documentation, \url{https://ai.google.dev/gemini-api/docs}.
+  \item Tavily search API documentation, \url{https://docs.tavily.com/}.
+  \item Tenacity documentation, \url{https://tenacity.readthedocs.io/}.
+  \item pydantic-settings documentation, \url{https://docs.pydantic.dev/latest/concepts/pydantic_settings/}.
+  \item Python \texttt{asyncio.timeout} (3.11+), \url{https://docs.python.org/3/library/asyncio-task.html\#asyncio.timeout}.
+  \item Wikimedia User-Agent policy, \url{https://meta.wikimedia.org/wiki/User-Agent_policy}.
+  \item Course brief, \texttt{SOFTWARE\_PROJECT.pdf} (AI-ENG-110, Spring 2026).
+\end{enumerate}
+
+\appendix
+\section{Appendix --- Reproducing the benchmark}
+
+\begin{lstlisting}[style=python,language=bash,numbers=none]
+git clone https://github.com/mrorxan/research-assistant
+cd research-assistant
+python -m venv .venv && .venv\Scripts\activate
+pip install -r requirements.txt
+python scripts/bench.py --N 5 --max-parallel 3
+\end{lstlisting}
+
+No API keys are needed for the benchmark; the fetchers are deterministic stubs. Expected output within a few percent on any modern machine:
+
+\begin{lstlisting}[style=python,language=bash,numbers=none]
+{
+  "n_iterations": 5,
+  "sleep_per_source_s": 0.5,
+  "max_parallel": 3,
+  "sequential_s": 7.589,
+  "concurrent_s": 2.535,
+  "speedup": 2.99
+}
+\end{lstlisting}
+
+For the live path: fill \texttt{.env} from \texttt{.env.example} with a Gemini and a Tavily key, then \texttt{python scripts/demo.py} answers the five sample questions and writes \texttt{artefacts/demo\_run.json}.
 
 \vspace{1em}\hrule\vspace{0.6em}
 \noindent\small\textit{End of report --- thank you for reading.}
