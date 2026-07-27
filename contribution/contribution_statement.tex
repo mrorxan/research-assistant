@@ -1,0 +1,160 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[dvipsnames]{xcolor}
+
+\newcommand{\teamname}{Binary}
+\newcommand{\topicchoice}{Topic 4 -- Async Research Assistant}
+\newcommand{\statementdate}{July 29, 2026}
+\newcommand{\repolink}{\url{https://github.com/mrorxan/research-assistant}}
+
+\newcommand{\coursecode}{AI-ENG-110}
+\newcommand{\coursename}{Software Engineering}
+\newcommand{\institution}{AI Academy, National AI Center}
+\newcommand{\semester}{Spring 2026}
+
+\usepackage[margin=2.0cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[final,protrusion=true,expansion=false]{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage[parfill]{parskip}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=NavyBlue,
+  urlcolor=NavyBlue,
+  pdftitle={\coursecode\ Contribution Statement},
+  pdfauthor={\teamname}
+}
+
+\definecolor{accent}{HTML}{0B3D91}
+
+\titleformat{\section}
+  {\large\bfseries\color{accent}}{}{0em}{}
+\titlespacing*{\section}{0pt}{1.0em}{0.4em}
+
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+\small
+
+\begin{center}
+{\footnotesize \textsc{\institution} \\[0.2em] \textsc{\coursecode\ -- \coursename\ -- \semester}}\\[0.9em]
+{\LARGE\bfseries\color{accent} Contribution Statement}\\[0.4em]
+\rule{0.85\textwidth}{0.6pt}
+\end{center}
+
+\vspace{0.2em}
+\begin{tabularx}{\textwidth}{@{}lXlX@{}}
+\textbf{Team:} & \teamname & \textbf{Topic:} & \topicchoice \\
+\textbf{Repository:} & \repolink & \textbf{Final tag:} & \texttt{v1.0-final} \\
+\textbf{Date:} & \statementdate & \textbf{Members:} & Orkhan Aliyev, Habil Huseynov \\
+\end{tabularx}
+\vspace{0.2em}\hrule
+
+\section{How the work was divided}
+
+The project was split chronologically into two halves of comparable size. Orkhan
+built the foundation and the service layer: everything from the project scaffold
+up to and including the tested wrappers around the provided \texttt{ai/} package.
+At that point the work was handed over, and Habil composed those pieces into the
+concurrent application and shipped it: orchestration, business flow, CLI, scripts,
+containerisation, and CI. Documentation was split the same way, each member
+writing the sections that cover his own code. Both halves went through pull
+requests reviewed and approved by the other member.
+
+\section{Member A --- Orkhan Aliyev (\texttt{@mrorxan})}
+
+\textbf{Owned (sole author of these files and pull requests):}
+\begin{itemize}[topsep=1pt,itemsep=0pt,leftmargin=1.4em]
+  \item Project scaffold: the provided \texttt{ai/}, \texttt{data/} and smoke tests copied in unchanged; \texttt{.gitignore}, \texttt{.env.example}, \texttt{pytest.ini}, \texttt{requirements.txt}, initial \texttt{pyproject.toml}
+  \item \texttt{researcher/config.py}, \texttt{researcher/models.py}
+  \item \texttt{researcher/storage/cache\_store.py}, \texttt{researcher/telemetry/cost.py}
+  \item \texttt{researcher/services/ai\_service.py}, \texttt{researcher/services/cache.py}
+  \item \texttt{tests/test\_config.py}, \texttt{test\_models.py}, \texttt{test\_cache\_store.py}, \texttt{test\_cost.py}, \texttt{test\_ai\_service.py}, \texttt{test\_cache.py}
+  \item SE-layer fixtures added to \texttt{tests/conftest.py} (provided smoke-test fixtures kept unchanged)
+  \item Report: Executive Summary and sections 1, 2, 4, 5; slides 1--5
+  \item README: quick start, CLI, environment variables, architecture, project layout
+  \item Compiled deliverables (report, slides, this statement) and the \texttt{v1.0-final} tag
+  \item Pull requests: \#1, \#2, \#3, \#4, \#11, \#13, \#14
+\end{itemize}
+
+\textbf{Co-owned:} \texttt{tests/conftest.py} (shared fixtures later consumed by Habil's tests).
+
+\textbf{Reviewed and approved:} all of Habil's pull requests (\#5--\#10, \#12) covering the
+orchestrator, failover, researcher flow and CLI, scripts and artefacts, Docker and CI,
+architecture documentation, and his documentation half.
+
+\textbf{Approximate share of commits:} 50\,\%
+
+\section{Member B --- Habil Huseynov (\texttt{@Habil7})}
+
+\textbf{Owned (sole author of these files and pull requests):}
+\begin{itemize}[topsep=1pt,itemsep=0pt,leftmargin=1.4em]
+  \item \texttt{researcher/concurrency/orchestrator.py}
+  \item \texttt{researcher/core/researcher.py}, \texttt{researcher/cli.py}, \texttt{researcher/\_\_main\_\_.py}
+  \item \texttt{researcher/services/failover.py}
+  \item \texttt{scripts/demo.py} and \texttt{scripts/bench.py}
+  \item Measured run artefacts: \texttt{artefacts/bench.json}, \texttt{artefacts/demo\_run.json}
+  \item \texttt{Dockerfile}, \texttt{.dockerignore}, \texttt{requirements-dev.txt}, \texttt{.github/workflows/ci.yml}, ruff and mypy configuration
+  \item \texttt{tests/test\_orchestrator.py}, \texttt{test\_researcher.py}, \texttt{test\_cli.py}, \texttt{test\_end\_to\_end.py}, \texttt{test\_failover.py}
+  \item \texttt{docs/architecture.md}
+  \item Report: sections 3, 6, 7, 8, 9, Tools \& Acknowledgements, Appendix; slides 6--10
+  \item README: Docker, tests, benchmark, live demo, limitations, tools
+  \item Pull requests: \#5, \#6, \#7, \#8, \#9, \#10, \#12
+\end{itemize}
+
+\textbf{Co-owned:} \texttt{tests/conftest.py} (consumer of the shared fixtures).
+
+\textbf{Reviewed and approved:} all of Orkhan's pull requests (\#1--\#4, \#11, \#13, \#14) covering
+the scaffold, configuration and models, cache store and telemetry, the service layer,
+his documentation half, and the compiled deliverables.
+
+\textbf{Approximate share of commits:} 50\,\%
+
+\section{AI tool disclosure}
+
+We used Claude (Anthropic) as an AI coding assistant throughout the project, in the
+way the course brief permits: as a collaborator, not a ghostwriter.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}llX@{}}
+\toprule
+\textbf{Module / area} & \textbf{Assistant} & \textbf{What the team did with it} \\
+\midrule
+SE-layer modules (\texttt{researcher/}) & Claude & Drafted against the architecture and policies we specified; every file reviewed, adjusted, and verified by running the suite and live calls before commit. \\
+Test suite & Claude & Drafted test cases per module; we reviewed each, kept what pinned real behaviour, and validated the suite offline and inside Docker. \\
+Report, slides, README & Claude & Drafted from our measured results; every number cross-checked against the committed artefacts. \\
+Live debugging & Claude & Helped diagnose the Wikipedia User-Agent policy (HTTP 403) and the Windows console encoding crash; both fixes tested live. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Every measured figure in the deliverables comes from runs executed by the team on our
+own machines. Each module has a primary owner listed above who can walk through and
+defend it.
+
+\section{Declaration}
+
+By signing below, we affirm that the contributions described above are accurate, that
+the commit shares reflect actual work rather than artificially split commits, that each
+module has a primary owner who understands and can explain it, and that AI assistant
+usage has been disclosed as described.
+
+\vspace{1.6em}
+\begin{center}
+\begin{tabularx}{0.92\textwidth}{@{}Xcc@{}}
+\toprule
+\textbf{Member} & \textbf{Signature} & \textbf{Date} \\
+\midrule
+\rule{0pt}{3.2em}Orkhan Aliyev (\texttt{@mrorxan}) & \rule{5cm}{0.4pt} & \rule{2.6cm}{0.4pt} \\
+\rule{0pt}{3.2em}Habil Huseynov (\texttt{@Habil7}) & \rule{5cm}{0.4pt} & \rule{2.6cm}{0.4pt} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\end{document}
