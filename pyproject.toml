@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "researcher"
+version = "1.0.0"
+description = "Async research assistant with cited answers. AI-ENG-110 final project."
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28",
+    "pydantic>=2.13",
+    "pydantic-settings>=2.14",
+    "python-dotenv>=1.2",
+    "tenacity>=9.1",
+    "click>=8.4",
+    "google-genai>=2.12",
+]
+
+[tool.setuptools.packages.find]
+include = ["researcher*", "ai*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["researcher"]
+omit = ["researcher/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
