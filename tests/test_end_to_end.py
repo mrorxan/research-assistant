@@ -8,6 +8,7 @@ from ai.schemas import AnswerWithCitations
 from researcher.cli import build_researcher
 from researcher.services import ai_service as ai_service_module
 
+
 def _install_mocks(monkeypatch, wikipedia_source, arxiv_source, web_source, call_count=None):
     async def mock_wikipedia(query, *, max_results, client=None):
         if call_count is not None:

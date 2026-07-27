@@ -21,9 +21,10 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from researcher.cli import HTTP_USER_AGENT, build_researcher  # noqa: E402
-from researcher.config import get_settings  # noqa: E402
-from researcher.services.failover import build_llm  # noqa: E402
+from researcher.cli import HTTP_USER_AGENT, build_researcher
+from researcher.config import get_settings
+from researcher.services.failover import build_llm
+
 
 async def run_demo(question_limit: int, no_cache: bool) -> None:
     load_dotenv()
@@ -53,7 +54,7 @@ async def run_demo(question_limit: int, no_cache: bool) -> None:
             started = time.perf_counter()
             try:
                 session = await researcher.ask(question["text"], client=client, llm=llm)
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001 -- demo script: isolate one bad question, keep going
                 print(f"  failed: {exc}")
                 records.append({"question_id": question["id"],
                                 "question": question["text"], "error": str(exc)})

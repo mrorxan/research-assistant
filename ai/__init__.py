@@ -22,18 +22,30 @@ synthesize(question, sources, *, llm=None) -> AnswerWithCitations
 Schemas: Source, Citation, AnswerWithCitations.
 """
 
-from ai.schemas import Source, Citation, AnswerWithCitations
+from ai.schemas import AnswerWithCitations, Citation, Source
 from ai.sources import (
-    fetch_wikipedia, fetch_arxiv, fetch_web,
-    WebSearchProvider, TavilyProvider, SerperProvider, DuckDuckGoProvider,
+    DuckDuckGoProvider,
+    SerperProvider,
+    TavilyProvider,
+    WebSearchProvider,
+    fetch_arxiv,
+    fetch_web,
+    fetch_wikipedia,
     get_web_search_provider,
 )
 from ai.synthesizer import synthesize
 
 __all__ = [
-    "Source", "Citation", "AnswerWithCitations",
-    "fetch_wikipedia", "fetch_arxiv", "fetch_web",
-    "WebSearchProvider", "TavilyProvider", "SerperProvider", "DuckDuckGoProvider",
+    "AnswerWithCitations",
+    "Citation",
+    "DuckDuckGoProvider",
+    "SerperProvider",
+    "Source",
+    "TavilyProvider",
+    "WebSearchProvider",
+    "fetch_arxiv",
+    "fetch_web",
+    "fetch_wikipedia",
     "get_web_search_provider",
     "synthesize",
 ]

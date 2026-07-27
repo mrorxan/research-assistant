@@ -91,7 +91,7 @@ def sample_sources() -> list[Source]:
 # SE-layer fixtures. Everything above this line belongs to the provided
 # smoke-test contract and keeps its names unchanged.
 
-from researcher.config import Settings  # noqa: E402
+from researcher.config import Settings
 
 
 @pytest.fixture

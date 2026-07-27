@@ -12,6 +12,7 @@ from researcher import cli as cli_module
 from researcher.core.researcher import QuestionValidationError
 from researcher.models import ResearchSession
 
+
 def _fake_session() -> ResearchSession:
     source = Source(
         title="Photosynthesis",

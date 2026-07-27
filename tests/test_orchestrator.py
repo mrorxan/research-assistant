@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-import pytest
 import asyncio
 
-from researcher.services.cache import FetchResult
+import pytest
+
 from researcher.concurrency.orchestrator import SourceOrchestrator
+from researcher.services.cache import FetchResult
+
 
 class ScriptedService:
     """Fake CachedAIService with per-source results, delays, and failures."""

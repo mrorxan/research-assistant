@@ -8,14 +8,16 @@ grading contract. Add your own tests in tests/test_*.py.
 from __future__ import annotations
 
 import pytest
+from pydantic import ValidationError
 
 from ai import (
-    Source, Citation, AnswerWithCitations,
-    fetch_web, synthesize,
+    AnswerWithCitations,
+    Source,
+    fetch_web,
+    synthesize,
 )
-from ai.synthesizer import _extract_cited_indices
 from ai.sources import _parse_arxiv_atom
-
+from ai.synthesizer import _extract_cited_indices
 
 # --- Source model ---------------------------------------------------------
 
@@ -32,7 +34,7 @@ def test_source_rejects_empty_title():
 
 def test_source_is_frozen():
     s = Source(title="t", url="u", snippet="s", origin="web")
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         s.title = "new"  # type: ignore
 
 
@@ -138,7 +140,7 @@ def test_parse_arxiv_atom_empty_feed():
 
 def test_source_rejects_extra_fields():
     """Pydantic ConfigDict(extra='forbid') enforces the schema contract."""
-    with pytest.raises(Exception):  # pydantic.ValidationError
+    with pytest.raises(ValidationError):
         Source(
             title="t", url="u", snippet="s", origin="web",
             totally_unknown_field=42,  # type: ignore[call-arg]

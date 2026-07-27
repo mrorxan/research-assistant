@@ -8,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-from ai.providers.base import VLMProvider, LLMProvider, EmbeddingProvider, ProviderError
+from ai.providers.base import EmbeddingProvider, LLMProvider, ProviderError, VLMProvider
 
 
 def _make_gemini_client(api_key: str | None):

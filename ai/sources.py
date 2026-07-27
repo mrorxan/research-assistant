@@ -23,6 +23,7 @@ Design notes
 from __future__ import annotations
 
 import abc
+import logging
 import os
 import re
 import xml.etree.ElementTree as ET
@@ -31,6 +32,7 @@ from typing import Any
 from ai.providers.base import ProviderError
 from ai.schemas import Source
 
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # httpx is imported lazily so the package stays importable without it.
@@ -104,9 +106,11 @@ async def fetch_wikipedia(
                     _WIKI_SUMMARY_URL.format(title=title.replace(" ", "_"))
                 )
                 summ.raise_for_status()
-            except Exception:
-                continue  # one bad title shouldn't kill the whole fetch
-            body = summ.json()
+                body = summ.json()
+            except (httpx.HTTPError, ValueError) as e:
+                # one bad title shouldn't kill the whole fetch
+                logger.debug("wiki_summary_skip title=%s error=%s", title, e)
+                continue
             extract = (body.get("extract") or "").strip()
             if not extract:
                 continue
@@ -339,6 +343,7 @@ class DuckDuckGoProvider(WebSearchProvider):
     ) -> list[Source]:
         # `client` is unused — this provider doesn't speak HTTP directly.
         import asyncio
+
         from duckduckgo_search import DDGS  # type: ignore
 
         def _run() -> list[Source]:
